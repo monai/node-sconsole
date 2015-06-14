@@ -10,3 +10,4 @@ var console_ = sconsole.console;
 
 console_.dir({'ok': 'bo'}, { colors: true });
 console_.dir({'ok': 'bo'}, { colors: true });
+console_.warn('warning');
