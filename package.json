@@ -9,6 +9,7 @@
   "author": "monai",
   "license": "ISC",
   "dependencies": {
+    "ansi-regex": "^1.1.1",
     "readable-stream": "^2.0.0"
   }
 }
