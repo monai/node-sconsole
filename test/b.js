@@ -1,13 +1,11 @@
-var sconsole = require('../');
+var sconsole = require('..');
 
-sconsole = sconsole({
-    'ident': ''
+sconsole.setup({
+    ident: '',
+    stdio: true,
+    syslog: true
 });
-// sconsole.log(sconsole.priority.info, 'b.js');
-// sconsole.close();
 
-var console_ = sconsole.console;
-
-console_.dir({'ok': 'bo'}, { colors: true });
-console_.dir({'ok': 'bo'}, { colors: true });
-console_.warn('warning');
+sconsole.dir({'ok': 'bo'}, { colors: true });
+sconsole.dir({'ok': 'bo'}, { colors: true });
+sconsole.warn('warning');
