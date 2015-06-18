@@ -1,1 +1,1 @@
-module.exports = require('./lib/sconsole.js');
+module.exports = require('./lib/sconsole');
