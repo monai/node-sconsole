@@ -1,13 +1,17 @@
-var sconsole = require('../');
+var sconsole = require('..');
 
-sconsole = sconsole({
-    'ident': 'pewpew'
+sconsole.setup({
+    upto: sconsole.priority.info,
+    ident: 'my app',
+    stdio: true,
+    syslog: {
+        upto: sconsole.priority.error
+    }
 });
-sconsole.log(sconsole.priority.err, 'a.js');
-sconsole.close();
-
-sconsole.warning('the warning');
 
 setTimeout(function () {
-    sconsole.log(sconsole.priority.err, 'a.js');
-}, 1000);
+    eval("eval(\"sconsole.log('log')\")");
+    sconsole.warning('warning');
+    sconsole.error('error');
+    sconsole.notice('notice');
+}, 1);
