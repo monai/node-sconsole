@@ -22,7 +22,7 @@ if (argv.indexOf('--test') > 0) {
     index = 0;
     pending = tests.length;
 
-    console.log('\nRunning %d tests...\n', pending);
+    console.log('\nRunning %d test files...\n', pending);
 
     next();
 }
@@ -59,7 +59,7 @@ function runTest(item) {
 
         exitCode = code || exitCode;
 
-        console.log('Test \'%s\' (%d of %d) ... %s', item.name, left, total, code ? 'FAILED\n' : 'PASSED');
+        console.log('Test %d of %d: \'%s\' ... %s', left, total, item.name, code ? 'FAILED\n' : 'PASSED');
         code && console.log(errors.join('\n'));
 
         active--;
