@@ -19,14 +19,11 @@ a.setup({
     syslog: {}
 });
 
-assert.equal(a.stack.length, 2);
-assert.equal(a.upto, 4);
+assert.equal(a.stack.length, 2, "Stack should be updated");
+assert.equal(a.upto, 4, "Value of 'upto' should be inherited from base options");
 
-assert.equal(a.stack.shift().fn, stdio.fn);
-assert.equal(a.stack.shift().fn, syslog.fn);
-
-assert.deepEqual(stdio.fn.options, { propA: 'a', propB: 'b', upto: 4, format: 'format' });
-assert.deepEqual(syslog.fn.options, { propA: 'a', propB: 'b', upto: 4, format: 'format' });
+assert.deepEqual(stdio.fn.options, { propA: 'a', propB: 'b', upto: 4, format: 'format' }, "All options for stdio should be inherited from base options");
+assert.deepEqual(syslog.fn.options, { propA: 'a', propB: 'b', upto: 4, format: 'format' }, "All options for syslog should be inherited from base options");
 
 // Inherit correct format
 b.setup({
@@ -37,8 +34,8 @@ b.setup({
     syslog: {}
 });
 
-assert.equal(stdio.fn.options.format, 'stdioFormat');
-assert.equal(syslog.fn.options.format, 'syslogFormat');
+assert.equal(stdio.fn.options.format, 'stdioFormat', "stdio format option should be inherited from base stdioFormat option");
+assert.equal(syslog.fn.options.format, 'syslogFormat', "syslog format option should be inherited from base syslogFormat option");
 
 // Preserve specialized options
 c.setup({
@@ -52,8 +49,8 @@ c.setup({
     syslog: { format: 'syslog', propB: 'B' }
 });
 
-assert.deepEqual(stdio.fn.options, { propA: 'A', propB: 'b', upto: 4, format: 'stdio' });
-assert.deepEqual(syslog.fn.options, { propA: 'a', propB: 'B', upto: 4, format: 'syslog' });
+assert.deepEqual(stdio.fn.options, { propA: 'A', propB: 'b', upto: 4, format: 'stdio' }, "stdio options shouldn't be overwritten by base options");
+assert.deepEqual(syslog.fn.options, { propA: 'a', propB: 'B', upto: 4, format: 'syslog' }, "syslog options shouldn't be overwritten by base options");
 
 function stdio(options) {
     stdio.fn = function () {};
