@@ -9,9 +9,9 @@ var d = sconsole.create();
 
 // Argument validation
 assert.throws(function () { a.use(0); }, /function/);
-assert.throws(function () { a.use(null, fn); }, /constants/);
-assert.throws(function () { a.use(LOG_DEBUG + 1, fn); }, /constants/);
-assert.throws(function () { a.use('something', fn); }, /constants/);
+assert.throws(function () { a.use(null, fn); }, /priority/);
+assert.throws(function () { a.use(LOG_DEBUG + 1, fn); }, /priority/);
+assert.throws(function () { a.use('something', fn); }, /priority/);
 
 // Single argument
 b.use(fn);
