@@ -9,7 +9,6 @@ var exitCode = 0;
 var argv = process.argv;
 
 if (argv.indexOf('--test') > 0) {
-    global.assert = assert;
     process.on('uncaughtException', function (error) {
         console.error(error.stack);
         process.exit(1);

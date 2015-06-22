@@ -1,4 +1,4 @@
-/* globals assert */
+var assert = require('assert');
 
 require.cache[require.resolve('../lib/stdio')] = { exports: stdio };
 require.cache[require.resolve('../lib/syslog')] = { exports: syslog };

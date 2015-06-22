@@ -1,4 +1,4 @@
-/* globals assert */
+var assert = require('assert');
 
 var sconsole = require('..');
 var LOG_DEBUG = sconsole.priority.debug;

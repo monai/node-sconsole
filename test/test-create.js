@@ -1,5 +1,4 @@
-/* globals assert */
-
+var assert = require('assert');
 var sconsole = require('..');
 
 var writes = 0;
