@@ -13,7 +13,6 @@
     "index.js"
   ],
   "dependencies": {
-    "ansi-regex": "^1.1.1",
     "chalk": "^1.0.0",
     "strftime": "^0.9.2",
     "syslog-bindings": "0.0.3"
