@@ -1,4 +1,4 @@
-var sconsole = require('..');
+var sconsole = require('..').create();
 
 sconsole.setup({
     ident: '',
