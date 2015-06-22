@@ -1,71 +1,88 @@
-var tests, pending, active, index;
-var fs = require('fs');
-var assert = require('assert');
-var path = require('path');
-var cp = require('child_process');
-
-var limit = require('os').cpus().length * 2;
-var exitCode = 0;
 var argv = process.argv;
 
 if (argv.indexOf('--test') > 0) {
+    child();
+} else {
+    main();
+}
+
+function child() {
     process.on('uncaughtException', function (error) {
         console.error(error.stack);
         process.exit(1);
     });
 
     require('./'+ argv[argv.indexOf('--test') + 1]);
-} else {
-    tests = fs.readdirSync(__dirname).map(buildTest).filter(Boolean);
-    active = 0;
-    index = 0;
-    pending = tests.length;
+}
 
-    console.log('\nRunning %d test files...\n', pending);
+function main() {
+    var cp = require('child_process');
+    var path = require('path');
+    var list = require('fs').readdirSync(__dirname).map(build).filter(Boolean);
+    var limit = require('os').cpus().length * 2;
+
+    var total = list.length;
+    var pending = total;
+    var active = 0;
+    var index = 0;
+    var exitCode = 0;
+
+    console.log('\nRunning %d test files...\n', total);
 
     next();
-}
 
-function next() {
-    if (active < limit && pending && index < tests.length) {
-        runTest(tests[index++]);
+    function next() {
+        if (active < limit && pending && index < list.length) {
+            run(list[index++]);
 
-        if (++active < limit) {
-            next();
+            if (++active < limit) {
+                next();
+            }
         }
     }
-}
 
-function runTest(item) {
-    var errors = [];
-    var child = cp.spawn('node', [ path.join(__filename), '--test', item.filename ]).on('exit', exit);
+    function run(item) {
+        var errors = [];
+        var child = cp.spawn('node', [ path.join(__filename), '--test', item.filename ]).on('exit', exit);
 
-    child.stdout.on('data', stdout).setEncoding('utf8');
-    child.stderr.on('data', stderr).setEncoding('utf8');
+        child.stdout.on('data', stdout).setEncoding('utf8');
+        child.stderr.on('data', stderr).setEncoding('utf8');
 
-    function stdout(chunk) {
-        console.log('[%s]:', item.name);
-        process.stdout.write(indent(chunk));
-    }
+        function stdout(chunk) {
+            console.log('[%s]:', item.name);
+            process.stdout.write(indent(chunk));
+        }
 
-    function stderr(chunk) {
-        errors.push(indent(chunk));
-    }
+        function stderr(chunk) {
+            errors.push(indent(chunk));
+        }
 
-    function exit(code) {
-        var total = tests.length;
-        var left = total - pending + 1;
+        function exit(code) {
+            // Just in case...
+            setImmediate(function () {
+                exit_(code);
+            });
+        }
 
-        exitCode = code || exitCode;
+        function exit_(code) {
+            var left = total - pending + 1;
+            var suffix = 'PASSED';
 
-        console.log('Test %d of %d: \'%s\' ... %s', left, total, item.name, code ? 'FAILED\n' : 'PASSED');
-        code && console.log(errors.join('\n'));
+            if (code) {
+                exitCode = code;
+                suffix = 'FAILED\n\n'+ errors.join('\n');
+            }
 
-        active--;
+            console.log('Test %d of %d: \'%s\' ... %s', left, total, item.name, suffix);
 
-        if ( ! --pending) {
-            console.log('\nDONE');
-            process.exit(exitCode);
+            active--;
+
+            if ( ! --pending) {
+                console.log('\nDONE');
+                process.exit(exitCode);
+            } else {
+                next();
+            }
         }
     }
 }
@@ -74,7 +91,7 @@ function indent(text) {
     return text.replace(/^/mg, '    ').replace(/^ +$/mg, '');
 }
 
-function buildTest(filename) {
+function build(filename) {
     if (filename.indexOf('test-') === 0 && filename.slice(-3) === '.js') {
         return {
             filename: filename,
