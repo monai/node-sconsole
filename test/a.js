@@ -9,8 +9,6 @@ sconsole.setup({
     }
 });
 
-console.log(sconsole);
-
 sconsole.error('error');
 setTimeout(function () {
     eval("eval(\"sconsole.log('log')\")");
