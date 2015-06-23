@@ -1,5 +1,8 @@
 # node-sconsole
 
+[![Build Status](http://img.shields.io/travis/monai/node-sconsole/develop.svg)](https://travis-ci.org/monai/node-sconsole)
+[![NPM Version](http://img.shields.io/npm/v/sconsole.svg)](https://www.npmjs.org/package/sconsole)
+
 Unified logger to console and syslog.
 
 `npm install sconsole`
