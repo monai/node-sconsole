@@ -1,4 +1,4 @@
-var sconsole = require('..').create();
+var sconsole = require('..');
 
 sconsole.setup({
     upto: sconsole.priority.info,
@@ -9,6 +9,9 @@ sconsole.setup({
     }
 });
 
+console.log(sconsole);
+
+sconsole.error('error');
 setTimeout(function () {
     eval("eval(\"sconsole.log('log')\")");
     sconsole.warning('warning');
