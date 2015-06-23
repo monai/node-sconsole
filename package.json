@@ -1,11 +1,32 @@
 {
   "name": "sconsole",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.2",
+  "description": "Unified logger to console and syslog",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/run"
   },
   "author": "monai",
-  "license": "ISC"
+  "license": "ISC",
+  "files": [
+    "lib",
+    "index.js"
+  ],
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "syslog-bindings": "^0.1.0"
+  },
+  "homepage": "https://github.com/monai/node-sconsole.git",
+  "bugs": {
+    "url": "https://github.com/monai/node-sconsole/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monai/node-sconsole.git"
+  },
+  "keywords": [
+    "console",
+    "log",
+    "syslog"
+  ]
 }

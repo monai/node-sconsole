@@ -1,7 +1,11 @@
-var sconsole = require('../');
+var sconsole = require('..').create();
 
-sconsole = sconsole({
-    'ident': 'zapzap'
+sconsole.setup({
+    ident: '',
+    stdio: true,
+    syslog: true
 });
-sconsole.log(sconsole.priority.err, 'b.js');
-sconsole.close();
+
+sconsole.dir({'ok': 'bo'}, { colors: true });
+sconsole.dir({'ok': 'bo'}, { colors: true });
+sconsole.warn('warning');
