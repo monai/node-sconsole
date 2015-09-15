@@ -1,6 +1,6 @@
 {
   "name": "sconsole",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Unified logger to console and syslog",
   "main": "index.js",
   "scripts": {
@@ -13,8 +13,8 @@
     "index.js"
   ],
   "dependencies": {
-    "chalk": "^1.0.0",
-    "syslog-bindings": "^0.1.0"
+    "chalk": "^1.1.1",
+    "syslog-bindings": "^1.0.1"
   },
   "homepage": "https://github.com/monai/node-sconsole.git",
   "bugs": {
