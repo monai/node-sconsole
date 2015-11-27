@@ -7,7 +7,6 @@ var sconsole = require('..');
 var a = sconsole.create();
 var b = sconsole.create();
 var c = sconsole.create();
-var d = sconsole.create();
 
 // Inherite all base options
 a.setup({
