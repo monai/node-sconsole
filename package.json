@@ -1,6 +1,6 @@
 {
   "name": "sconsole",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Unified logger to console and syslog",
   "main": "index.js",
   "scripts": {
